@@ -5,10 +5,9 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import WorkoutCard from "../components/ui/WorkoutCard";
 import FloatingActionButton from "../components/ui/FloatingActionButton";
 import { useQuery } from "@apollo/client";
-import ErroMessage from "../components/ui/ErrorMessage"
+import ErroMessage from "../components/ui/ErrorMessage";
 import { GET_FEED } from "../../database/graphql/query/Feed";
-
-
+import Dropdown from "../components/ui/Dropdown";
 
 function Feed({ onNavigateToNewPost, onNavigateToProfile, onLogout }) {
   const [activeItem, setActiveItem] = useState("feed");
@@ -43,7 +42,7 @@ function Feed({ onNavigateToNewPost, onNavigateToProfile, onLogout }) {
     }
   };
 
-console.log(error)
+  console.log(error);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -60,6 +59,14 @@ console.log(error)
               Feed de Treinos
             </h1>
 
+            <Dropdown
+              options={[]}
+              value={""}
+              onChange={() => {}}
+              placeholder="Todos"
+              className="mb-6"
+            />
+
             {/* Loading State */}
             {loading && (
               <div className="flex justify-center items-center py-8">
@@ -69,7 +76,10 @@ console.log(error)
 
             {/* Error State */}
             {error && (
-              <ErroMessage message = "Erro ao carregar treinos"  error={error.message} ></ErroMessage>
+              <ErroMessage
+                message="Erro ao carregar treinos"
+                error={error.message}
+              ></ErroMessage>
             )}
 
             {/* Workout Cards Grid */}
