@@ -7,22 +7,23 @@ export const GET_FEED = gql`
       user
       time
       stats
+      workout     # <-- Voltou para 'workout'
       description
-      workout
+      timestamp
     }
   }
 `;
 
-// query composta com filtros 
 export const GET_FEED_BY_CATEGORY = gql`
   query GetFeedByCategory($category: String) {
-    allFeeds(filter: { q: $category }) {
+    allFeeds(filter: { workout: $category }) { # <-- Filtra pelo campo 'workout'
       id
       user
       time
       stats
+      workout     # <-- Voltou para 'workout'
       description
-      workout
+      timestamp
     }
   }
 `;

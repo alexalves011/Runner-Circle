@@ -27,10 +27,7 @@ function Feed({ onNavigateToNewPost, onNavigateToProfile, onLogout }) {
       const fetchWorkouts = async () => {
         const normalizedWorkouts = data.allFeeds.map((item) => {
           if (item.workout) {
-            return {
-              id: item.id,
-              ...item.workout,
-            };
+           setWorkouts(data.allFeeds);
           }
           return item;
         });
@@ -54,7 +51,7 @@ function Feed({ onNavigateToNewPost, onNavigateToProfile, onLogout }) {
 
   const categoryOptions = [
     { value: "", label: "todos" },
-    { value: "caminhada", label: "caminhada" },
+    { value: "treino", label: "treino" },
     { value: "corrida", label: "corrida" },
   ];
 

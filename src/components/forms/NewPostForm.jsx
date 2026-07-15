@@ -3,8 +3,9 @@ import Input from '../ui/Input'
 import Button from '../ui/Button'
 import Textarea from '../ui/Textarea'
 import RadioGroup from '../ui/RadioGroup'
+import { Opacity } from '@mui/icons-material'
 
-function NewPostForm({ onSubmit, onCancel }) {
+function NewPostForm({ onSubmit, onCancel, loading }) {
   const [formData, setFormData] = useState({
     tempo: '',
     distancia: '',
@@ -132,9 +133,9 @@ function NewPostForm({ onSubmit, onCancel }) {
           </Button>
           <Button
             type="submit"
-            className="flex-1 bg-brand-green-lime text-brand-graphite hover:bg-brand-green-medium"
+            className= {`flex-1 bg-brand-green-lime text-brand-graphite hover:bg-brand-green-medium  ${loading ? 'Opacity-50 cursor-not-allowed' : ''} `}
           >
-            Salvar
+            { loading ? 'Salvando...' : "Salvar"}
           </Button>
         </div>
       </form>
