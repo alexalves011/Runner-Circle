@@ -8,10 +8,47 @@ import {
   GET_FEED,
   GET_FEED_BY_CATEGORY,
 } from "../../database/graphql/query/feed";
+import { Feed } from "@mui/icons-material";
 
 function NewPost({ onNavigateToFeed }) {
   const [addFeedPost, { loading: savingPost }] = useMutation(ADD_FEED_POST, {
     refetchQueries: [{ query: GET_FEED }, { query: GET_FEED_BY_CATEGORY }],
+    update: (cache, { data: { creatFeed } }) => {
+      try {
+        const existingFeed = cache.readQuery({ query: GET_FEED });
+        if (existingFeed) {
+          cache.writeQuery({
+            query: GET_FEED,
+            data: {
+              feed: [creatFeed, ...existingFeed.feed],
+            },
+          });
+        }
+      } catch (error) {
+        console.log("Cache Update Error", error);
+      }
+
+      try {
+        const existingCategoryFeed = cache.readQuery({
+          query: GET_FEED_BY_CATEGORY,
+          variables: { category: creatFeed.category },
+        });
+        if (existingCategoryFeed) {
+          cache.writeQuery({
+            query: GET_FEED_BY_CATEGORY,
+            variables: { category: creatFeed.category },
+            data: {
+              feedByCategory: [
+                creatFeed,
+                ...existingCategoryFeed.feedByCategory,
+              ],
+            },
+          });
+        }
+      } catch (error) {
+        console.log("Category cache update error", error);
+      }
+    },
   });
 
   const handleSubmit = async (formData) => {

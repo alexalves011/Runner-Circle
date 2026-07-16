@@ -51,7 +51,7 @@ function Feed({ onNavigateToNewPost, onNavigateToProfile, onLogout }) {
 
   const categoryOptions = [
     { value: "", label: "todos" },
-    { value: "treino", label: "treino" },
+    { value: "caminhada", label: "caminhada" },
     { value: "corrida", label: "corrida" },
   ];
 
